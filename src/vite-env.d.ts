@@ -1,13 +1,19 @@
 /// <reference types="vite/client" />
+// Don't use import or export statements in this file, as it is treated as a module
+// and can cause issues with Vite's type detection.
 
 // biome-ignore lint/correctness/noUnusedVariables: Used by Vite
 interface ViteTypeOptions {
     strictImportEnv: unknown;
 }
 
+// biome-ignore lint/suspicious/noEmptyInterface: Empty interface, since empty envs
 interface ImportMetaEnv {
-    readonly VITE_APP_TITLE: string;
-    // 다른 환경 변수들에 대한 타입 정의...
+    /**
+     * VITE_SOMETHING_COOL_ENV will be available in your code as
+     * import.meta.env.VITE_SOMETHING_COOL_ENV
+     */
+    //readonly VITE_SOMETHING_COOL_ENV: string;
 }
 
 // biome-ignore lint/correctness/noUnusedVariables: Used by Vite
