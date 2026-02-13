@@ -20,5 +20,6 @@
     "[css]": {
         "editor.defaultFormatter": "biomejs.biome"
     },
-    "typescript.preferences.preferTypeOnlyAutoImports": true
+    "typescript.preferences.preferTypeOnlyAutoImports": true,
+    "biome.requireConfiguration": true
 }

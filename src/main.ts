@@ -4,6 +4,7 @@ import { setupCounter } from "./counter.ts";
 
 //This is the entrypoint
 
+// biome-ignore lint/style/noNonNullAssertion: Not an actual code, just an example
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <a href="https://vite.dev" target="_blank">
@@ -22,4 +23,5 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
+// biome-ignore lint/style/noNonNullAssertion: Not an actual code, just an example
 setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);

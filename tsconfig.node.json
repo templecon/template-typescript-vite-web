@@ -1,18 +1,9 @@
 {
     "compilerOptions": {
         "tsBuildInfoFile": "./node_modules/.cache/node.tsbuildinfo",
-        "lib": [
-            "ESNext",
-            "DOM",
-            "DOM.Iterable"
-        ],
-        "types": [
-            "vite/client",
-            "@types/node"
-        ]
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "types": ["vite/client", "@types/node"]
     },
-    "include": [
-        "vite.config.ts"
-    ],
+    "include": ["vite.config.ts"],
     "extends": "./tsconfig.base.json"
 }

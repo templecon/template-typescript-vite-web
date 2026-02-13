@@ -2,7 +2,6 @@
 // Don't use import or export statements in this file, as it is treated as a module
 // and can cause issues with Vite's type detection.
 
-// biome-ignore lint/correctness/noUnusedVariables: Used by Vite
 interface ViteTypeOptions {
     strictImportEnv: unknown;
 }
@@ -16,7 +15,6 @@ interface ImportMetaEnv {
     //readonly VITE_SOMETHING_COOL_ENV: string;
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: Used by Vite
 interface ImportMeta {
     readonly env: ImportMetaEnv;
 }
