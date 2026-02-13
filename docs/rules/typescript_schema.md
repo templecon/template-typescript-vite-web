@@ -24,8 +24,7 @@ export const SomeSchema = z.object({
      * Description of entry
      */
     description: z.string().optional(),
-// .prefault makes this schema entirely optional,
-// since prefault ensures all property have optional or default value somewhere.
+// .prefault({}) makes this schema optional, since it ensures all properties have a default value or are marked as optional.
 }).prefault({});
 // If we use .default, we should declare default value one more time.
 

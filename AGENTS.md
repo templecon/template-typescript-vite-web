@@ -63,62 +63,6 @@ Most of these rule will be applied on format.
 
 This project uses **pnpm**.
 
-## Instructions
-### TypeScript
+## Code Style
 
-#### Write function's signature short
-```ts
-// Don't(No JSDoc, long function signature)
-export function dont({ id, name }: { id: number; name: string }) {
-  console.log(id, name);
-}
-
-// Don't(it looks bad on JSDoc, since all parameters are documented on not type itself but function's JSDoc. Also, JSDoc declares types, but TypeScript does same thing with more power.)
-/**
- * Performs a bad operation.
- * @param params - The parameters for the operation.
- * @param {number} params.id - The unique identifier.
- * @param {string} params.name - The name of the entity.
- */
-export function dont2({ id, name }: { id: number; name: string }) {
-  console.log(id, name);
-}
-
-// Do(since all parameters are documented and accessible on IDE hover, without opening its declaration)
-type Params2 = {
-  /**
-   * The unique identifier.
-   */
-  id: number;
-  /**
-   * The name of the entity.
-   */
-  name: string;
-};
-/**
- * Performs a good operation with the given parameters.
- * @param params - The parameters for the operation.
- */
-export function doGood({ id, name }: Params2) {
-  console.log(id, name);
-}
-```
-#### No `as`
-```ts
-function doSomething(): OtherType {}
-type SomeType = {
-  value: string;
-};
-type OtherType = {
-  value: string;
-  notExist: number;
-};
-// Don't(It uses any type.)
-const data = doSomething() as any;
-
-// Don't(Declares type, but still uses `as`.)
-const data = doSomething() as SomeType;
-
-// Do(Uses `satisfies` to ensure type compatibility without losing type information.)
-const data = doSomething() satisfies SomeType; // Will cause compile error if incompatible. Good!
-```
+Check out docs/rules directory for more information.

@@ -37,5 +37,18 @@
             "arrowParentheses": "always"
         }
     },
-    "root": true
+    "root": true,
+    "overrides": [
+        {
+            "includes": ["**/*.d.ts"],
+            "linter": {
+                "rules": {
+                    "correctness": {
+                        // d.ts's variables and interfaces should be remained even if it's unused.
+                        "noUnusedVariables": "off"
+                    }
+                }
+            }
+        }
+    ]
 }
