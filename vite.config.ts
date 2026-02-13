@@ -39,7 +39,7 @@ const testConfig: Config["test"] = {
     exclude: ["**/node_modules/**", "**/dist/**"],
     coverage: {
         provider: "v8",
-        reporter: ["text", "json", "html"],
+        reporter: ["text", "json-summary", "html"],
         include: ["src/**/*.ts"],
         enabled: true,
         reportOnFailure: true,

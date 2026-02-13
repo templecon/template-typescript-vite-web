@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
+        shardIndex: [1, 2] # [1,2,3,4,5...]
+        shardTotal: [2] # [len(shardIndex)]
     steps:
       - uses: actions/checkout@v4
       - name: Setup pnpm Environment
@@ -23,10 +23,7 @@ jobs:
           install-playwright-deps: 'true'
 
       - name: Run tests
-        run: pnpm run test \
-          --reporter=blob \
-          --coverage.enabled \
-          --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm run test --reporter=blob --coverage.enabled --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
@@ -59,12 +56,10 @@ jobs:
           merge-multiple: true
 
       - name: Merge reports
-        run: pnpm run vitest --merge-reports \
-          --reporter=github-actions \
-          --reporter=default \
-          --coverage.reporter=text \
-          --coverage.reporter=json-summary
+        run: pnpm run test --merge-reports --reporter=github-actions --reporter=default --coverage.reporter=text --coverage.reporter=json-summary
 
       - name: Update Coverage Status
         if: ${{ github.event_name == 'pull_request' && always()}}
         uses: concertypin/action/report-vitest-coverage@master
+        with:
+          threshold: 50
