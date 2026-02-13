@@ -113,7 +113,6 @@ type SomeType = {
   value: string;
 };
 type OtherType = {
-  value: string;
   notExist: number;
 };
 // Don't(It uses any type.)

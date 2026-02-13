@@ -24,7 +24,7 @@ pnpm format
 # Lint code with Biome
 pnpm lint
 
-# Run tests (Vitest with jsdom environment)
+# Run tests (Vitest with Playwright and Node environment)
 pnpm test
 ```
 
@@ -42,9 +42,10 @@ This project uses **Biome** for formatting and linting (configured in `biome.jso
 - 80 character line width
 - Double quotes for JavaScript/TypeScript
 - Semicolons always
-- Trailing commas in all cases
+- Trailing commas (ES5 style)
 - Arrow parentheses always
 - LF line endings
+Most of these rule will be applied on format.
 
 ## TypeScript Configuration
 

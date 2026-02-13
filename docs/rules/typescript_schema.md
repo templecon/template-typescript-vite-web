@@ -19,12 +19,16 @@ export const SomeSchema = z.object({
     /**
      * Name of entry
      */
-    name: z.string().default("Some name")
+    name: z.string().default("Some name"),
     /**
      * Description of entry
      */
-    description: z.string().optional()
-}).prefault({})
+    description: z.string().optional(),
+// .prefault makes this schema entirely optional,
+// since prefault ensures all property have optional or default value somewhere.
+}).prefault({});
+// If we use .default, we should declare default value one more time.
+
 
 /**
  * Don't have to link original schema, since type definition is simple with z.output<typeof schema>.
@@ -33,5 +37,8 @@ export type SomeType = z.output<typeof SomeSchema>;
 
 /**
  * If type might not have default value, use z.input.
+ * Since we used .prefault, it can be not only empty object, but also empty value(undefined).
+ * Still typesafe.
  */
 export type SomeInputType = z.input<typeof SomeSchema>
+```

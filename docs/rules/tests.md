@@ -50,7 +50,7 @@ Use these for testing DOM manipulation and browser-only APIs. These tests run in
     - ❌ Avoid: `getByLabelText`, `getByText` (Use only as a last resort).
     - ✅ Prefer: `getByRole("button", { name: "Save" })` (Explicit selection based on Accessibility Tree).
 - Upgrade Selectors: Even if user's provided example uses simple selectors, you must upgrade them to Accessibility (Role) based selectors in your final code.
-qa
+
 ```typescript
 // button.ts (The Component)
 export function createButton(text: string): HTMLButtonElement {

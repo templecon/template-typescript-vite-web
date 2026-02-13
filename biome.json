@@ -15,7 +15,8 @@
     "linter": {
         "enabled": true,
         "domains": {
-            "project": "recommended"
+            "project": "recommended",
+            "test": "recommended"
         },
         "rules": {
             "recommended": true
@@ -36,18 +37,5 @@
             "arrowParentheses": "always"
         }
     },
-    "root": true,
-    "overrides": [
-        {
-            "includes": ["**/*.d.ts"]
-        },
-        {
-            "includes": ["tests/**/*.test.ts"],
-            "linter": {
-                "domains": {
-                    "test": "recommended"
-                }
-            }
-        }
-    ]
+    "root": true
 }
