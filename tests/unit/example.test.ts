@@ -8,9 +8,9 @@ describe("example test", () => {
         expectTypeOf<"asdf">().toBeString();
     });
     it.concurrent("should run in node environment", () => {
-        // process is only available in node environment,
-        // not in browser.
-        // If this test runs successfully, it means the node environment is set up correctly.
+        // Process is only available in node environment,
+        // Not in browser.
+        // If this test runs successfully, the node environment works.
         expect(globalThis.localStorage).not.toBeDefined();
     });
 });

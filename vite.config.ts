@@ -1,76 +1,76 @@
 /// <reference types="vitest/config" />
 
+import { type UserConfig, defineConfig } from "vite";
 import { fileURLToPath } from "node:url";
 import { playwright } from "@vitest/browser-playwright";
-import { defineConfig, type UserConfig } from "vite";
 
 type Config = Required<UserConfig>;
 const resolve: Config["resolve"] = {
     alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "@": fileURLToPath(new URL("src", import.meta.url)),
     },
 };
 
 const browserInclude = ["**/tests/browser/**/*.test.ts"];
 const browserTestConfig = {
     enabled: true,
-    provider: playwright(),
     headless: true,
     instances: [
         {
             browser: "chromium",
-            include: browserInclude,
             expect: {
                 poll: {
                     timeout: 5000,
                 },
             },
+            include: browserInclude,
         },
     ],
+    provider: playwright(),
 } satisfies Config["test"]["browser"];
 const testConfig: Config["test"] = {
-    globals: true,
-    environment: "node",
-    setupFiles: "./tests/setup.ts",
-    include: ["tests/**/*.test.ts"],
-    exclude: ["**/node_modules/**", "**/dist/**"],
     coverage: {
-        provider: "v8",
-        reporter: ["text", "json-summary", "html"],
-        include: ["src/**/*.ts"],
         enabled: true,
+        include: ["src/**/*.ts"],
+        provider: "v8",
         reportOnFailure: true,
+        reporter: ["text", "json-summary", "html"],
     },
+    environment: "node",
+    exclude: ["**/node_modules/**", "**/dist/**"],
+    globals: true,
+    include: ["tests/**/*.test.ts"],
     projects: [
         {
             extends: true,
             test: {
-                name: "browser",
                 browser: browserTestConfig,
+                name: "browser",
             },
         },
         {
             extends: true,
             test: {
-                name: "node",
                 browser: {
                     enabled: false,
                 },
                 exclude: browserInclude,
+                name: "node",
             },
         },
     ],
+    setupFiles: "./tests/setup.ts",
 };
 export default defineConfig({
-    plugins: [],
-    server: {
-        open: "index.html",
-    },
-    test: testConfig,
     build: {
         outDir: "dist",
         sourcemap: true,
     },
     clearScreen: false,
+    plugins: [],
     resolve,
+    server: {
+        open: "index.html",
+    },
+    test: testConfig,
 });

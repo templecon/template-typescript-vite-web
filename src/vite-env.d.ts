@@ -1,12 +1,12 @@
 /// <reference types="vite/client" />
-// Don't use import or export statements in this file, as it is treated as a module
-// and can cause issues with Vite's type detection.
+// Don't use import or export statements in this file, as it is
+// treated as a module and can cause issues with Vite's type detection.
 
 interface ViteTypeOptions {
     strictImportEnv: unknown;
 }
 
-// biome-ignore lint/suspicious/noEmptyInterface: Empty interface, since empty envs
+// oxlint-disable-next-line typescript/no-empty-object-type
 interface ImportMetaEnv {
     /**
      * VITE_SOMETHING_COOL_ENV will be available in your code as

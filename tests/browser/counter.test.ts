@@ -1,7 +1,7 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import { setupCounter } from "@/counter";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-describe("setupCounter", () => {
+describe("setupCounter increasing", () => {
     let button: HTMLButtonElement;
 
     beforeEach(() => {
@@ -53,7 +53,7 @@ describe("setupCounter", () => {
 
         setupCounter(button);
 
-        expect(addEventListenerSpy).toHaveBeenCalledTimes(1);
+        expect(addEventListenerSpy).toHaveBeenCalledOnce();
         expect(addEventListenerSpy).toHaveBeenCalledWith(
             "click",
             expect.any(Function)
