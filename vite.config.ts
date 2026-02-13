@@ -30,9 +30,6 @@ const browserTestConfig = {
 } satisfies Config["test"]["browser"];
 const testConfig: Config["test"] = {
     globals: true,
-    typecheck: {
-        enabled: true,
-    },
     environment: "node",
     setupFiles: "./tests/setup.ts",
     include: ["tests/**/*.test.ts"],

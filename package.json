@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build",
+        "build": "tsc -b && vite build",
         "format": "biome format --write .",
         "lint": "pnpm run lint:check --write",
         "lint:check": "biome check .",
