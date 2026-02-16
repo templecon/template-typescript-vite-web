@@ -2,17 +2,10 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.tabSize": 4,
-        "editor.codeActionsOnSave": {
-            "source.fixAll.oxc": "explicit",
-            "source.sortImports": "explicit"
-        }
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.tabSize": 4,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports.biome": "explicit"
-        }
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
