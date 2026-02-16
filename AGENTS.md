@@ -1,6 +1,7 @@
 # AGENTS.md
 
 This file provides guidance to AI agents when working with code in this repository.
+All agents, such as Claude Code, should keep `**/AGENTS.md` in mind.
 
 ## Project Type
 
@@ -18,10 +19,10 @@ pnpm build
 # Preview production build locally
 pnpm preview
 
-# Format code with Biome
+# Format code
 pnpm format
 
-# Lint code with Biome
+# Lint code
 pnpm lint
 
 # Run tests (Vitest with Playwright and Node environment)
@@ -35,17 +36,9 @@ pnpm test
 - **Direct DOM manipulation** using standard browser APIs
 - **Static assets**: Place in `public/` directory
 
-## Code Style
+## Coding Standards
 
-This project uses **Biome** for formatting and linting (configured in `biome.json`):
-- 4-space indentation
-- 80 character line width
-- Double quotes for JavaScript/TypeScript
-- Semicolons always
-- Trailing commas (ES5 style)
-- Arrow parentheses always
-- LF line endings
-Most of these rule will be applied on format.
+See `docs/rules/` for TypeScript, testing, and tooling guidelines.
 
 ## TypeScript Configuration
 
@@ -62,7 +55,3 @@ Most of these rule will be applied on format.
 ## Package Manager
 
 This project uses **pnpm**.
-
-## Code Style
-
-Check out docs/rules directory for more information.

@@ -22,5 +22,11 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "typescript.preferences.preferTypeOnlyAutoImports": true,
-    "oxc.typeAware": true
+    "oxc.typeAware": true,
+    "prettier.requireConfig": true,
+    "files.exclude": {
+        // Generated d.ts, which is not useful since all tsconfig emits there.
+        "dist-ts": true,
+        "coverage": true
+    }
 }

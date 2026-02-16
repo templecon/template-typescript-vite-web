@@ -5,11 +5,11 @@ It describes TypeScript rules for the project for readability.
 
 - [TL;DR](#tldr)
 - [Detail](#detail)
-  - [Write Essay for Code](#write-essay-for-code)
-  - [Interface is not interface but interface](#interface-is-not-interface-but-interface)
-  - [Anyone Dislikes `Any` as Much `as any`one](#anyone-dislikes-any-as-much-as-anyone)
-  - [Lazy Dog Than The Quick Brown Fox](#lazy-dog-than-the-quick-brown-fox)
-  - [Brain Can StackOverflow](#brain-can-stackoverflow)
+    - [Write Essay for Code](#write-essay-for-code)
+    - [Interface is not interface but interface](#interface-is-not-interface-but-interface)
+    - [Anyone Dislikes `Any` as Much `as any`one](#anyone-dislikes-any-as-much-as-anyone)
+    - [Lazy Dog Than The Quick Brown Fox](#lazy-dog-than-the-quick-brown-fox)
+    - [Brain Can StackOverflow](#brain-can-stackoverflow)
 
 ## TL;DR
 
@@ -42,7 +42,7 @@ Same goes for code documentation. It helps others (and future you) understand th
 ```ts
 // Don't(No JSDoc, long function signature)
 export function dont({ id, name }: { id: number; name: string }) {
-  console.log(id, name);
+    console.log(id, name);
 }
 
 // Don't(it looks bad on JSDoc, since all parameters are documented on not type itself but function's JSDoc. Also, JSDoc declares types, but TypeScript does same thing with more power.)
@@ -53,26 +53,26 @@ export function dont({ id, name }: { id: number; name: string }) {
  * @param {string} params.name - The name of the entity.
  */
 export function dont2({ id, name }: { id: number; name: string }) {
-  console.log(id, name);
+    console.log(id, name);
 }
 
 // Do(since all parameters are documented and accessible on IDE hover, without opening its declaration)
 type Params2 = {
-  /**
-   * The unique identifier.
-   */
-  id: number;
-  /**
-   * The name of the entity.
-   */
-  name: string;
+    /**
+     * The unique identifier.
+     */
+    id: number;
+    /**
+     * The name of the entity.
+     */
+    name: string;
 };
 /**
  * Performs a good operation with the given parameters.
  * @param params - The parameters for the operation.
  */
 export function doGood({ id, name }: Params2) {
-  console.log(id, name);
+    console.log(id, name);
 }
 ```
 
@@ -83,22 +83,22 @@ Sounds confusing? It is. In TypeScript, `interface` can be used both as a type a
 ```ts
 // Don't(It will be used as... what? Type or Interface? Guessing game starts here.)
 interface User {
-  id: number;
-  name: string;
+    id: number;
+    name: string;
 }
 const user: User = { id: 1, name: "Alice" }; // It was used as type here.
 class UserAccount implements User {
-  // Answer: Both! 🤯
-  constructor(
-    public id: number,
-    public name: string,
-  ) {}
+    // Answer: Both! 🤯
+    constructor(
+        public id: number,
+        public name: string
+    ) {}
 }
 
 // Do(Clearer! It is clearly a type.)
 type User = {
-  id: number;
-  name: string;
+    id: number;
+    name: string;
 };
 ```
 
@@ -110,10 +110,10 @@ Also, `as` defeats the purpose of TypeScript's type safety. Use `satisfies` inst
 ```ts
 function doSomething(): OtherType {}
 type SomeType = {
-  value: string;
+    value: string;
 };
 type OtherType = {
-  notExist: number;
+    notExist: number;
 };
 // Don't(It uses any type.)
 const data = doSomething() as any;
@@ -141,31 +141,31 @@ If you're going to use the module definitely, but not immediately, consider use 
 // Don't(It makes large module and this code packed together on bundling time.)
 import { largeModule } from "large-module";
 function useModule(dry: boolean) {
-  if (dry) {
-    console.log("Dry run, not using large module.");
-    return;
-  }
-  largeModule.doSomething();
+    if (dry) {
+        console.log("Dry run, not using large module.");
+        return;
+    }
+    largeModule.doSomething();
 }
 // Don't(Better than above, but still makes large module loaded on page load even it might not be used.)
 import("large-module");
 async function useModule(dry: boolean) {
-  const { largeModule } = await import("large-module");
-  if (dry) {
-    console.log("Dry run, not using large module.");
-    return;
-  }
-  largeModule.doSomething();
+    const { largeModule } = await import("large-module");
+    if (dry) {
+        console.log("Dry run, not using large module.");
+        return;
+    }
+    largeModule.doSomething();
 }
 
 // Do(Lazy-loads large module only when needed.)
 async function useModule(dry: boolean) {
-  if (dry) {
-    console.log("Dry run, not using large module.");
-    return;
-  }
-  const { largeModule } = await import("large-module");
-  largeModule.doSomething();
+    if (dry) {
+        console.log("Dry run, not using large module.");
+        return;
+    }
+    const { largeModule } = await import("large-module");
+    largeModule.doSomething();
 }
 ```
 
@@ -178,50 +178,50 @@ Methods, functions, classes, etc... should be small. It is also applied to funct
 ```ts
 // Don't(Destructured parameters with inline types that are too long.)
 function processData({
-  id,
-  name,
-  age,
-  address,
-  phone,
-  email,
+    id,
+    name,
+    age,
+    address,
+    phone,
+    email,
 }: {
-  id: number;
-  name: string;
-  age: number;
-  address: string;
-  phone: string;
-  email: string;
+    id: number;
+    name: string;
+    age: number;
+    address: string;
+    phone: string;
+    email: string;
 }) {
-  console.log(id, name, age, address, phone, email);
+    console.log(id, name, age, address, phone, email);
 }
 
 // Do(Using named types for destructured parameters.)
 type UserData = {
-  /**
-   * The unique identifier.
-   */
-  id: number;
-  // So on...
-  name: string;
-  age: number;
-  address: string;
-  phone: string;
-  email: string;
+    /**
+     * The unique identifier.
+     */
+    id: number;
+    // So on...
+    name: string;
+    age: number;
+    address: string;
+    phone: string;
+    email: string;
 };
 function processData({ id, name, age, address, phone, email }: UserData) {
-  console.log(id, name, age, address, phone, email);
+    console.log(id, name, age, address, phone, email);
 }
 
 // Best(Simpler way is just don't destructure parameters.)
 function processData(userData: UserData) {
-  console.log(
-    userData.id,
-    userData.name,
-    userData.age,
-    userData.address,
-    userData.phone,
-    userData.email,
-  );
+    console.log(
+        userData.id,
+        userData.name,
+        userData.age,
+        userData.address,
+        userData.phone,
+        userData.email
+    );
 }
 ```
 

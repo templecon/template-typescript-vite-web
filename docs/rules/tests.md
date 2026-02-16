@@ -1,18 +1,19 @@
 ## 0. General Guidelines
 
 Tests should follow general TypeScript guidelines. Tests should cover:
-    - Normal behavior
-    - Edge cases
-    - Invalid input
-    - Boundary values
-    - Unexpected states
-    - TypeScript's type check, via Vitest's type assertion features. See [more](https://vitest.dev/guide/testing-types) and [more](https://github.com/mmkal/expect-type)
+- Normal behavior
+- Edge cases
+- Invalid input
+- Boundary values
+- Unexpected states
+- TypeScript's type check, via Vitest's type assertion features. See [more](https://vitest.dev/guide/testing-types) and [more](https://github.com/mmkal/expect-type)
 
 ## 1. Unit Tests (Node.js)
 
 Use these for pure TypeScript utility files. These tests run in Node.js for maximum speed.
 
 ### Guidelines:
+
 - File Extension: Use `.test.ts`.
 - Location: `tests/unit/` directory.
 - Environment: Default (Node.js).
@@ -42,6 +43,7 @@ describe("User List", () => {
 Use these for testing DOM manipulation and browser-only APIs. These tests run in a real browser, allowing you to test layout, real event bubbling, and browser-only APIs (like `IntersectionObserver`).
 
 ### Guidelines:
+
 - File Extension: Use `.test.ts`.
 - Location: `tests/browser/` directory.
 - Tooling: Use `@vitest/browser-playwright` with `page` from `@vitest/browser/context` for interactions.
@@ -86,5 +88,6 @@ describe("Button Component", () => {
 ```
 
 ## Documentation
+
 - [Vitest docs](https://vitest.dev/guide/)
 - [Playwright docs](https://playwright.dev/docs/intro)
