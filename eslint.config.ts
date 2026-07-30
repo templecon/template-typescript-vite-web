@@ -4,6 +4,9 @@ import tseslint from "typescript-eslint";
 import oxlint from "eslint-plugin-oxlint";
 import { defineConfig } from "eslint/config";
 
+import baseConfig from "@concertypin/config/oxlint";
+import oxlintConfig from "./oxlint.config.ts";
+
 const useEslint: EslintLevel = "off";
 
 type EslintLevel = "off" | "no-type-check" | "all";
@@ -32,6 +35,16 @@ if (eslintLevel === "off") {
         }
     );
 } else {
+    const mergedOxlintConfig: Record<string, unknown> = {
+        ...baseConfig,
+        ...oxlintConfig,
+        extends: [],
+        rules: {
+            ...baseConfig.rules,
+            ...oxlintConfig.rules,
+        },
+    };
+
     const tsConfig = () => {
         switch (eslintLevel) {
             case "no-type-check":
@@ -85,7 +98,7 @@ if (eslintLevel === "off") {
                 "@typescript-eslint/no-unused-vars": "off",
             },
         },
-        ...oxlint.buildFromOxlintConfigFile(".oxlintrc.json", {
+        ...oxlint.buildFromOxlintConfig(mergedOxlintConfig, {
             typeAware: true,
         })
     );

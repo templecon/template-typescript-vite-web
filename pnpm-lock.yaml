@@ -12,6 +12,9 @@ importers:
         specifier: ^4.1.18
         version: 4.1.18
     devDependencies:
+      '@concertypin/config':
+        specifier: ^0.1.0
+        version: 0.1.0(oxlint@1.47.0(oxlint-tsgolint@0.12.1))
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.0.0(jiti@2.6.1))
@@ -99,6 +102,12 @@ packages:
   '@bcoe/v8-coverage@1.0.2':
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
+
+  '@concertypin/config@0.1.0':
+    resolution: {integrity: sha512-xZjY0+skOVRrTDzjKLblqnhUor2C6qm5Ovew6ElzgzxuFjqDWRvoXVsLOMSCLHxBA9ECe8ExO0uBZKtz6DbvTQ==}
+    engines: {node: '>=20.19.0'}
+    peerDependencies:
+      oxlint: '>=1.47.0 <2'
 
   '@epic-web/invariant@1.0.0':
     resolution: {integrity: sha512-lrTPqgvfFQtR/eY/qkIzp98OGdNJu0m5ji3q/nJI8v3SXkRKEnWiOxMmbvcSoAIzv/cGiuvRy57k4suKQSAdwA==}
@@ -1503,6 +1512,10 @@ snapshots:
       '@babel/helper-validator-identifier': 7.28.5
 
   '@bcoe/v8-coverage@1.0.2': {}
+
+  '@concertypin/config@0.1.0(oxlint@1.47.0(oxlint-tsgolint@0.12.1))':
+    dependencies:
+      oxlint: 1.47.0(oxlint-tsgolint@0.12.1)
 
   '@epic-web/invariant@1.0.0': {}
 
