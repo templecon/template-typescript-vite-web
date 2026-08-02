@@ -1,67 +1,17 @@
-# AGENTS.md
+# Project Context
 
-This file provides guidance to AI agents when working with code in this repository.
-All agents, such as Claude Code, should keep `**/AGENTS.md` in mind.
+- This repository is a vanilla TypeScript website template built with Vite, not a library or framework application. `src/main.ts` renders directly into `#app` with browser DOM APIs.
+- The production build uses Vite `base: "./"`. Generated assets must stay relative so `.github/workflows/deploy.yml` can deploy `dist/` under any GitHub Pages repository path.
+- The supported runtime is Node.js `^24.15.0 || >=26.0.0`; package management uses pnpm and `pnpm-lock.yaml` is committed.
+- `@/*` resolves to `src/*`; TypeScript uses strict project references for application and Node configuration.
+- Tests are intentionally split: `tests/unit/` runs in Node and `tests/browser/` runs in jsdom. Vitest sets `import.meta.env.VITEST_MODE` to `"node"` or `"browser"` for the respective project; browser setup lives in `tests/setup.ts`.
+- Tailwind CSS v4 is imported from `src/style.css`; Vite processes PostCSS configuration.
 
-## Project Type
+## Project Conventions MCP Server
 
-This is a **vanilla TypeScript web application template** (not a library) built with Vite. It uses direct DOM manipulation without any framework like React or Vue.
+Project conventions are available from the conventions MCP server:
 
-## Development Commands
+- `https://conventions.aieuroka.workers.dev/mcp` for most clients
+- `https://conventions.aieuroka.workers.dev/with-tool/mcp` for GitHub Copilot clients without resource retrieval
 
-```bash
-# Start development server (auto-opens browser to index.html)
-pnpm dev
-
-# Build for production (runs TypeScript compilation, then Vite build)
-pnpm build
-
-# Preview production build locally
-pnpm preview
-
-# Format code
-pnpm format
-
-# Lint code
-pnpm lint
-
-# Run tests (Vitest with Playwright and Node environment)
-pnpm test
-```
-
-## Architecture
-
-- **Entry point**: `src/main.ts` - Initializes the application and renders to the `#app` div in `index.html`
-- **ES modules** throughout (`"type": "module"` in package.json)
-- **Direct DOM manipulation** using standard browser APIs
-- **Static assets**: Place in `public/` directory
-
-## Coding Standards
-
-See `docs/rules/` for TypeScript, testing, and tooling guidelines.
-
-## TypeScript Configuration
-
-- **Path alias**: `@/*` maps to `src/*` (configured in `tsconfig.base.json`)
-- **Project references**: Uses `tsconfig.json` with `app` and `node` references
-- **Strict mode** enabled
-
-## Styling
-
-- **Tailwind CSS v4** with new directive-based syntax: `@import "tailwindcss"`
-- Custom styles in `src/style.css` for layout and theming
-- PostCSS configured in `postcss.config.mjs`
-
-## Package Manager
-
-This project uses **pnpm**.
-
-## Using This Template
-
-Immediately after creating a project from this template, upgrade all dependencies and refresh the lockfile:
-
-```bash
-pnpm up --latest
-```
-
-Run the project's format, lint, test, and build checks after the upgrade and resolve every resulting error before continuing development.
+It uses Streamable HTTP and does not require authentication.

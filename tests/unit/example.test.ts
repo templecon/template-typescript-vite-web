@@ -11,6 +11,6 @@ describe("example test", () => {
         // Process is only available in node environment,
         // Not in browser.
         // If this test runs successfully, the node environment works.
-        expect(globalThis.localStorage).not.toBeDefined();
+        expect(globalThis).toHaveProperty("process");
     });
 });
