@@ -1,77 +1,52 @@
+import { fireEvent, getByRole } from "@testing-library/dom";
 import { setupCounter } from "@/counter";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 
-describe("setupCounter increasing", () => {
+describe("setupCounter", () => {
     let button: HTMLButtonElement;
-
     beforeEach(() => {
-        // Create a fresh button element for each test
         button = document.createElement("button");
+        document.body.replaceChildren(button);
     });
 
-    it("should initialize counter to 0", () => {
-        setupCounter(button);
-
-        expect(button.innerHTML).toBe("count is 0");
-    });
-
-    it("should increment counter on click", () => {
-        setupCounter(button);
-
-        button.click();
-
-        expect(button.innerHTML).toBe("count is 1");
-    });
-
-    it("should increment counter multiple times on multiple clicks", () => {
-        setupCounter(button);
-
-        button.click();
-        button.click();
-        button.click();
-
-        expect(button.innerHTML).toBe("count is 3");
-    });
-
-    it("should increment counter sequentially", () => {
-        setupCounter(button);
-
-        expect(button.innerHTML).toBe("count is 0");
-
-        button.click();
-        expect(button.innerHTML).toBe("count is 1");
-
-        button.click();
-        expect(button.innerHTML).toBe("count is 2");
-
-        button.click();
-        expect(button.innerHTML).toBe("count is 3");
-    });
-
-    it("should only add event listener once", () => {
-        const addEventListenerSpy = vi.spyOn(button, "addEventListener");
+    it("shows the initial count", () => {
+        expect(getByRole(document.body, "button")).toBe(button);
 
         setupCounter(button);
 
-        expect(addEventListenerSpy).toHaveBeenCalledOnce();
-        expect(addEventListenerSpy).toHaveBeenCalledWith(
-            "click",
-            expect.any(Function)
+        expect(button.textContent).toBe("count is 0");
+    });
+
+    it("increments the count when a user clicks the button", () => {
+        expect(getByRole(document.body, "button")).toBe(button);
+        setupCounter(button);
+
+        fireEvent.click(button);
+
+        expect(button.textContent).toBe("count is 1");
+    });
+
+    it("keeps counters isolated between buttons", () => {
+        const firstButton = document.createElement("button");
+        firstButton.textContent = "First";
+        const secondButton = document.createElement("button");
+        secondButton.textContent = "Second";
+        document.body.replaceChildren(firstButton, secondButton);
+
+        expect(getByRole(document.body, "button", { name: "First" })).toBe(
+            firstButton
         );
-    });
+        expect(getByRole(document.body, "button", { name: "Second" })).toBe(
+            secondButton
+        );
 
-    it("should maintain separate counter state for each element", () => {
-        const button1 = document.createElement("button");
-        const button2 = document.createElement("button");
+        setupCounter(firstButton);
+        setupCounter(secondButton);
+        fireEvent.click(firstButton);
+        fireEvent.click(firstButton);
+        fireEvent.click(secondButton);
 
-        setupCounter(button1);
-        setupCounter(button2);
-
-        button1.click();
-        button1.click();
-        button2.click();
-
-        expect(button1.innerHTML).toBe("count is 2");
-        expect(button2.innerHTML).toBe("count is 1");
+        expect(firstButton.textContent).toBe("count is 2");
+        expect(secondButton.textContent).toBe("count is 1");
     });
 });

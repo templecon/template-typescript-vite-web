@@ -1,15 +1,2 @@
-// oxlint-disable-next-line unicorn/no-empty-file
-
-// Keep it light for test setups,
-// Since all tests will slow down if this file is heavy.
-
-/*
-// Demo code
-import { beforeEach, vi } from "vitest";
-beforeEach(() => {
-    const superDuperMockingLibrary = vi.fn(() => {
-        throw new Error("Do cool stuff!");
-    });
-    superDuperMockingLibrary.mockClear();
-});
-*/
+if (import.meta.env.VITEST_MODE === "browser")
+    await import("@testing-library/jest-dom/vitest");

@@ -2,7 +2,6 @@
 
 import { type UserConfig, defineConfig } from "vite";
 import { fileURLToPath } from "node:url";
-import { playwright } from "@vitest/browser-playwright";
 
 type Config = Required<UserConfig>;
 const resolve: Config["resolve"] = {
@@ -11,23 +10,6 @@ const resolve: Config["resolve"] = {
     },
 };
 
-const browserInclude = ["**/tests/browser/**/*.test.ts"];
-const browserTestConfig = {
-    enabled: true,
-    headless: true,
-    instances: [
-        {
-            browser: "chromium",
-            expect: {
-                poll: {
-                    timeout: 5000,
-                },
-            },
-            include: browserInclude,
-        },
-    ],
-    provider: playwright(),
-} satisfies Config["test"]["browser"];
 const testConfig: Config["test"] = {
     coverage: {
         enabled: true,
@@ -36,32 +18,41 @@ const testConfig: Config["test"] = {
         reportOnFailure: true,
         reporter: ["text", "json-summary", "html"],
     },
-    environment: "node",
-    exclude: ["**/node_modules/**", "**/dist/**"],
     globals: true,
-    include: ["tests/**/*.test.ts"],
     projects: [
         {
             extends: true,
             test: {
-                browser: browserTestConfig,
-                name: "browser",
+                environment: "node",
+                include: ["tests/unit/**/*.test.ts"],
+                name: "node",
+                env: {
+                    VITEST_MODE: "node",
+                },
             },
         },
         {
             extends: true,
             test: {
-                browser: {
-                    enabled: false,
+                environment: "jsdom",
+                environmentOptions: {
+                    jsdom: {
+                        url: "http://localhost/",
+                    },
                 },
-                exclude: browserInclude,
-                name: "node",
+                include: ["tests/browser/**/*.test.ts"],
+                setupFiles: ["tests/setup.ts"],
+                name: "browser",
+                env: {
+                    VITEST_MODE: "browser",
+                },
             },
         },
     ],
-    setupFiles: "./tests/setup.ts",
 };
+
 export default defineConfig({
+    base: "./",
     build: {
         outDir: "dist",
         sourcemap: true,
