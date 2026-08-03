@@ -9,7 +9,7 @@ git clone https://github.com/templecon/template-typescript-vite-web
 
 ## Requirements
 
-Node.js 24.15 or 26 or higher is required. The template runs TypeScript configuration and hooks directly with Node's built-in type stripping.
+Node.js 26 or higher is required. The template runs TypeScript configuration and hooks directly with Node's built-in type stripping.
 
 ## Static Hosting
 
