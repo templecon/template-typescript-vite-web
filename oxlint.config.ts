@@ -1,7 +1,8 @@
-import baseConfig from "@concertypin/config/oxlint";
+import frontendConfig from "@concertypin/config/oxlint/frontend";
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
+    ...frontendConfig("src/style.css"),
     plugins: ["typescript", "unicorn", "import", "vitest", "promise"],
     env: {
         builtin: true,
@@ -15,8 +16,4 @@ export default defineConfig({
         "**/.vscode/**",
         "**/.git/**",
     ],
-    rules: {
-        "no-console": "warn",
-    },
-    extends: [baseConfig],
 });
