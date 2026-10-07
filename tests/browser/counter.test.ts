@@ -1,6 +1,7 @@
 import { fireEvent, getByRole } from "@testing-library/dom";
-import { setupCounter } from "@/counter";
 import { beforeEach, describe, expect, it } from "vitest";
+
+import { setupCounter } from "@/counter";
 
 describe("setupCounter", () => {
     let button: HTMLButtonElement;

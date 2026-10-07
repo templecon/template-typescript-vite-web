@@ -1,7 +1,8 @@
-import baseConfig from "@concertypin/config/oxlint";
+import createFrontendOxlintConfig from "@concertypin/config/oxlint/frontend";
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
+    jsPlugins: ["oxlint-tailwindcss"],
     plugins: ["typescript", "unicorn", "import", "vitest", "promise"],
     env: {
         builtin: true,
@@ -15,8 +16,6 @@ export default defineConfig({
         "**/.vscode/**",
         "**/.git/**",
     ],
-    rules: {
-        "no-console": "warn",
-    },
-    extends: [baseConfig],
+    settings: { tailwindcss: { entryPoint: "src/style.css" } },
+    extends: [createFrontendOxlintConfig("src/style.css")],
 });

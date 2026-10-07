@@ -1,7 +1,8 @@
 /// <reference types="vitest/config" />
 
-import { type UserConfig, defineConfig } from "vite";
 import { fileURLToPath } from "node:url";
+
+import { type UserConfig, defineConfig } from "vite";
 
 type Config = Required<UserConfig>;
 const resolve: Config["resolve"] = {
