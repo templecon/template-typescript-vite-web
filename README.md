@@ -11,13 +11,7 @@ git clone https://github.com/templecon/template-typescript-vite-web
 
 Node.js 26 or higher is required. The template runs TypeScript configuration and hooks directly with Node's built-in type stripping.
 
-pnpm is pinned in the `packageManager` field of `package.json`. Install the pinned version:
-
-```sh
-npm install --global pnpm@10.17.1
-```
-
-Then install the dependencies:
+This project uses pnpm. Install dependencies:
 
 ```sh
 pnpm install
